@@ -40,3 +40,29 @@ class MarketStatus:
             volume=data["volume"],
         )
         return dt
+
+
+@dataclass
+class TextData:
+    time_stamp: int
+    text: str
+    _id: str = ""
+
+    def to_dict(self):
+        dt = {
+            "_id": self._id,
+            "time_stamp": self.time_stamp,
+            "text": self.text
+        }
+        if self._id or self._id == "":
+            del dt["_id"]
+        return dt
+
+    @staticmethod
+    def from_dict(data):
+        dt = TextData(
+            _id=data["_id"],
+            time_stamp=int(data["time_stamp"]),
+            text=data["text"]
+        )
+        return dt

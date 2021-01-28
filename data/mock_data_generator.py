@@ -1,6 +1,6 @@
 import random
 
-from data.price_data import MarketStatus
+from data.data_formats import MarketStatus, TextData
 
 
 def gen_market_status():
@@ -12,5 +12,13 @@ def gen_market_status():
         close=random.random(),
         time_stamp=round(random.random() * 10e5),
         volume=round(random.random() * 10e2),
+    )
+    return status
+
+
+def gen_market_text_data():
+    status = TextData(
+        time_stamp=round(random.random() * 10e5),
+        text=f"this kind of thing before {random.random()}",
     )
     return status
