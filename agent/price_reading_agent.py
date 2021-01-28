@@ -52,7 +52,7 @@ class PriceReadingAgent:
                         last_candle = status
 
                     if last_candle.time_stamp < status.time_stamp:
-                        await self.publish(Agent.Quantitative_FAAgent, last_candle.to_dict())
+                        await self.publish(Agent.Quantitative_FAAgent, last_candle)
                         await self.display(last_candle.to_dict())
 
                     last_candle = status

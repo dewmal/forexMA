@@ -24,10 +24,10 @@ def gen_market_text_data():
     return status
 
 
-def gen_fact_pattern():
+def gen_fact_pattern(time_stamp, asset_name):
     status = FactPattern(
-        time_stamp=round(random.random() * 10e5),
-        asset_name="EURUSD",
+        time_stamp=time_stamp,
+        asset_name=asset_name,
         accuracy=random.random(),
         expected_change=random.random(),
         direction=random.choice((MarketDirection.SELL, MarketDirection.BUY, MarketDirection.STAY)),
@@ -35,10 +35,10 @@ def gen_fact_pattern():
     return status
 
 
-def gen_action():
+def gen_action(time_stamp, asset_name):
     status = Action(
-        time_stamp=round(random.random() * 10e5),
-        asset_name="EURUSD",
+        time_stamp=time_stamp,
+        asset_name=asset_name,
         accuracy=random.random(),
         action_end_time=round(random.random() * 10e5),
         predicted_action=random.choice((MarketDirection.SELL, MarketDirection.BUY, MarketDirection.STAY)),

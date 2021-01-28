@@ -3,6 +3,8 @@ import asyncio
 import logging
 
 from agent import Agent
+from agent_helpers import message_filter
+from data.data_formats import MarketStatus
 from data.mock_data_generator import gen_fact_pattern
 
 log = logging.getLogger(Agent.Qualitative_FAAgent)
@@ -24,14 +26,18 @@ class QualitativeFAAgent:
         pass
 
     async def accept_message(self, agent, message):
-        print(f"{agent=} {message=}")
-        pattern = gen_fact_pattern()
-
-        await self.display(pattern.to_dict())
-        await self.publish(Agent.Decision_Agent, pattern.to_dict())
+        await self.qualitative_facts_analysis(agent=agent, status=message)
 
     async def stop(self, *args, **kwargs):
         pass
 
     async def execute(self, *args, **kwargs):
         pass
+
+    @message_filter(message_type=MarketStatus, param_name="status")
+    async def qualitative_facts_analysis(self, agent, status: MarketStatus):
+        print(f"{agent=},{status=}")
+        pattern = gen_fact_pattern(time_stamp=status.time_stamp, asset_name=status.asset_name)
+
+        await self.display(pattern.to_dict())
+        await self.publish(Agent.Decision_Agent, pattern)
