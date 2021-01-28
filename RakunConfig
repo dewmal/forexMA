@@ -1,0 +1,33 @@
+name: ForexMA
+version: 1.0.0
+buildversion: 1
+agents:
+
+  # Decision Agents
+  decision_agent: # Decision Making Agent
+    name: DecisionAgent
+    code: agent/decision_agent.py
+  performance_analysing_agent: # Performance Analysing Agent
+    name: PerformanceAnalysingAgent
+    code: agent/performance_analysing_agent.py
+
+  # Facts Analysing Agents
+  qualitative_facts_analysing_agent: # Qualitative Facts Analysing Agent
+    name: QualitativeFAAgent
+    code: agent/qualitative_facts_analysing.py
+  quantitative_facts_analysing_agent: # Quantitative Facts Analysing Agent
+    name: QuantitativeFAAgent
+    code: agent/quantitative_facts_analysing_agent.py
+
+  # Facts collecting Agents
+  price_reading_agent: # Qualitative Agent
+    name: PriceReadingAgent
+    code: agent/price_reading_agent.py
+  news_reading_agent: # Quantitative Agent
+    name: NewsReadingAgent
+    code: agent/news_reading_agent.py
+
+#workdir: K:\Research\trading_platform\crypto_analysert
+communicationurl: 127.0.0.1:6379
+requiredfiles:
+  - requirements.txt
