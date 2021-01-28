@@ -29,5 +29,6 @@ agents:
 
 #workdir: K:\Research\trading_platform\crypto_analysert
 communicationurl: 127.0.0.1:6379
+displayserverurl: 0.0.0.0:7878
 requiredfiles:
   - requirements.txt
