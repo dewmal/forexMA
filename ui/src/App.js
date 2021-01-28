@@ -1,25 +1,35 @@
+import React, { Component } from 'react'
 import logo from './logo.svg';
 import './App.css';
+import { startSocketIO } from "./service/socket";
+import store from './redux/store'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+class App extends Component {
+  componentWillMount() {
+    startSocketIO(store);
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
         </a>
-      </header>
-    </div>
-  );
+        </header>
+      </div>
+
+    );
+  }
 }
 
 export default App;
