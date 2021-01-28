@@ -23,7 +23,8 @@ class QuantitativeFAAgent:
         pass
 
     async def accept_message(self, agent, message):
-        pass
+        print(f"{agent=}")
+        print(f"{message=}")
 
     async def stop(self, *args, **kwargs):
         pass

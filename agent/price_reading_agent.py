@@ -3,6 +3,7 @@ import asyncio
 import logging
 
 from agent import Agent
+from data.mock_data_generator import gen_market_status
 
 log = logging.getLogger(Agent.Price_Reading_Agent)
 
@@ -30,6 +31,6 @@ class PriceReadingAgent:
 
     async def execute(self, *args, **kwargs):
         while True:
-            print("run")
-            # await self.publish("AgentTwo", "Hello AGENT 2")
+            status = gen_market_status()
+            await self.publish(Agent.Quantitative_FAAgent, status.to_dict())
             await asyncio.sleep(2)
