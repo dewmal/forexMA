@@ -32,7 +32,4 @@ class QualitativeFAAgent:
         pass
 
     async def execute(self, *args, **kwargs):
-        while True:
-            print("run")
-            # await self.publish("AgentTwo", "Hello AGENT 2")
-            await asyncio.sleep(2)
+        pass
