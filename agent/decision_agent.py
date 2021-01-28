@@ -23,13 +23,14 @@ class DecisionAgent:
         pass
 
     async def accept_message(self, agent, message):
-        pass
+        print(f"{agent=},{message=}")
 
     async def stop(self, *args, **kwargs):
         pass
 
     async def execute(self, *args, **kwargs):
-        while True:
-            print("run")
-            # await self.publish("AgentTwo", "Hello AGENT 2")
-            await asyncio.sleep(2)
+        pass
+        # while True:
+        #     print("run")
+        #     # await self.publish("AgentTwo", "Hello AGENT 2")
+        #     await asyncio.sleep(2)

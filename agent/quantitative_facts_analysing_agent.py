@@ -3,6 +3,7 @@ import asyncio
 import logging
 
 from agent import Agent
+from data.mock_data_generator import gen_fact_pattern
 
 log = logging.getLogger(Agent.Quantitative_FAAgent)
 
@@ -23,8 +24,9 @@ class QuantitativeFAAgent:
         pass
 
     async def accept_message(self, agent, message):
-        print(f"{agent=}")
-        print(f"{message=}")
+        print(f"{agent=} {message=}")
+        pattern = gen_fact_pattern()
+        await self.publish(Agent.Decision_Agent, pattern.to_dict())
 
     async def stop(self, *args, **kwargs):
         pass
