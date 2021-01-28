@@ -4,7 +4,7 @@ import logging
 
 from agent import Agent
 from agent_helpers import message_filter
-from data.data_formats import MarketStatus
+from data.data_formats import MarketStatus, TextData
 from data.mock_data_generator import gen_fact_pattern
 
 log = logging.getLogger(Agent.Qualitative_FAAgent)
@@ -27,6 +27,7 @@ class QualitativeFAAgent:
 
     async def accept_message(self, agent, message):
         await self.qualitative_facts_analysis(agent=agent, status=message)
+        await self.market_status(agent=agent, status=message)
 
     async def stop(self, *args, **kwargs):
         pass
@@ -34,10 +35,10 @@ class QualitativeFAAgent:
     async def execute(self, *args, **kwargs):
         pass
 
-    @message_filter(message_type=MarketStatus, param_name="status")
-    async def qualitative_facts_analysis(self, agent, status: MarketStatus):
+    @message_filter(message_type=TextData, param_name="status")
+    async def qualitative_facts_analysis(self, agent, status: TextData):
         print(f"{agent=},{status=}")
-        pattern = gen_fact_pattern(time_stamp=status.time_stamp, asset_name=status.asset_name)
 
-        await self.display(pattern.to_dict())
-        await self.publish(Agent.Decision_Agent, pattern)
+    @message_filter(message_type=MarketStatus, param_name="status")
+    async def market_status(self, agent, status: MarketStatus):
+        pass

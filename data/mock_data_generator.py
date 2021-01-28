@@ -36,12 +36,14 @@ def gen_fact_pattern(time_stamp, asset_name):
 
 
 def gen_action(time_stamp, asset_name):
-    status = Action(
-        time_stamp=time_stamp,
-        asset_name=asset_name,
-        accuracy=random.random(),
-        action_end_time=round(random.random() * 10e5),
-        predicted_action=random.choice((MarketDirection.SELL, MarketDirection.BUY, MarketDirection.STAY)),
-        predicted_price_variation=round(random.random() * 100),
-    )
-    return status
+    duration = round(random.random() * 10)
+    if duration > 0:
+        status = Action(
+            time_stamp=time_stamp,
+            asset_name=asset_name,
+            accuracy=random.random(),
+            action_end_time=(duration * 60) + time_stamp,
+            predicted_action=random.choice((MarketDirection.SELL, MarketDirection.BUY, MarketDirection.STAY)),
+            predicted_price_variation=round(random.random() * 100),
+        )
+        return status
