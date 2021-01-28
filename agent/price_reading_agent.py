@@ -1,4 +1,3 @@
-import asyncio
 import json
 import logging
 
@@ -53,12 +52,8 @@ class PriceReadingAgent:
 
                     if last_candle.time_stamp < status.time_stamp:
                         await self.publish(Agent.Quantitative_FAAgent, last_candle)
+                        await self.publish(Agent.Performance_Analysing_Agent, last_candle)
+                        await self.publish(Agent.Decision_Agent, last_candle)
                         await self.display(last_candle.to_dict())
 
                     last_candle = status
-
-        # while True:
-        #     status = gen_market_status()
-        #     await self.publish(Agent.Quantitative_FAAgent, status.to_dict())
-        #     await self.display(status.to_dict())
-        #     await asyncio.sleep(2)

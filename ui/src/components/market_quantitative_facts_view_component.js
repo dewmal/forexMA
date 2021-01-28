@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 
 
 const MarketQuantitativeFactViewCompoennt = ({ qunatitativeFacts }) => {
-	return (<> News Quntitative Facts	
+	return (<> 
+	<h2>Price Quntitative Facts	</h2>
 		<ul>
 			<li>Time, Asset, Accuracy, Excpected Change, Direction</li>
 			{qunatitativeFacts.map((qf) => <li>
