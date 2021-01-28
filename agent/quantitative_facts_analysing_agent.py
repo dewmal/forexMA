@@ -36,4 +36,4 @@ class QuantitativeFAAgent:
     async def quantitative_facts_analysis(self, agent, status: MarketStatus):
         pattern = gen_fact_pattern(time_stamp=status.time_stamp, asset_name=status.asset_name)
         await self.display(pattern.to_dict())
-        await self.publish(Agent.Decision_Agent, pattern.to_dict())
+        await self.publish(Agent.Decision_Agent, pattern)

@@ -3,6 +3,8 @@ import asyncio
 import logging
 
 from agent import Agent
+from agent_helpers import message_filter
+from data.data_formats import FactPattern
 from data.mock_data_generator import gen_action
 
 log = logging.getLogger(Agent.Decision_Agent)
@@ -24,17 +26,16 @@ class DecisionAgent:
         pass
 
     async def accept_message(self, agent, message):
-        print(f"{agent=},{message=}")
-        action = gen_action()
-        await self.display(action.to_dict())
-        await self.publish(Agent.Performance_Analysing_Agent, action.to_dict())
+        await self.pattern_analysis(agent=agent, pattern=message)
 
     async def stop(self, *args, **kwargs):
         pass
 
     async def execute(self, *args, **kwargs):
         pass
-        # while True:
-        #     print("run")
-        #     # await self.publish("AgentTwo", "Hello AGENT 2")
-        #     await asyncio.sleep(2)
+
+    @message_filter(message_type=FactPattern, param_name="pattern")
+    async def pattern_analysis(self, agent, pattern: FactPattern):
+        action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
+        await self.display(action.to_dict())
+        await self.publish(Agent.Performance_Analysing_Agent, action.to_dict())
