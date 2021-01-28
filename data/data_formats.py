@@ -1,3 +1,4 @@
+import enum
 from dataclasses import dataclass
 
 
@@ -68,12 +69,24 @@ class TextData:
         return dt
 
 
+class MarketDirection(enum.Enum):
+    BUY = "UP"
+    SELL = "DOWN"
+    STAY = "NULL"
+
+    @staticmethod
+    def value_of(value):
+        for m, mm in MarketDirection.__members__.items():
+            if m == value.upper():
+                return mm
+
+
 @dataclass
 class FactPattern:
     time_stamp: int
     asset_name: str
     expected_change: float
-    direction: str
+    direction: MarketDirection
     accuracy: float
     _id: str = ""
 
@@ -83,7 +96,7 @@ class FactPattern:
             "time_stamp": self.time_stamp,
             "asset_name": self.asset_name,
             "expected_change": self.expected_change,
-            "direction": self.direction,
+            "direction": self.direction.value,
             "accuracy": self.accuracy,
         }
         if self._id or self._id == "":
@@ -97,7 +110,43 @@ class FactPattern:
             time_stamp=int(data["time_stamp"]),
             asset_name=data["asset_name"],
             expected_change=data["expected_change"],
-            direction=data["direction"],
+            direction=MarketDirection.value_of(data["direction"]),
+            accuracy=data["accuracy"],
+        )
+        return dt
+
+
+@dataclass
+class Action:
+    time_stamp: int
+    action_end_time: int
+    asset_name: str
+    predicted_action: MarketDirection
+    predicted_price_variation: float
+    accuracy: float
+    _id: str = ""
+
+    def to_dict(self):
+        dt = {
+            "_id": self._id,
+            "time_stamp": self.time_stamp,
+            "asset_name": self.asset_name,
+            "predicted_action": self.predicted_action.value,
+            "predicted_price_variation": self.predicted_price_variation,
+            "accuracy": self.accuracy,
+        }
+        if self._id or self._id == "":
+            del dt["_id"]
+        return dt
+
+    @staticmethod
+    def from_dict(data):
+        dt = Action(
+            _id=data["_id"],
+            time_stamp=int(data["time_stamp"]),
+            asset_name=data["asset_name"],
+            predicted_action=MarketDirection.value_of(data["predicted_action"]),
+            predicted_price_variation=data["predicted_price_variation"],
             accuracy=data["accuracy"],
         )
         return dt

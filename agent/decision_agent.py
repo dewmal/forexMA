@@ -3,6 +3,7 @@ import asyncio
 import logging
 
 from agent import Agent
+from data.mock_data_generator import gen_action
 
 log = logging.getLogger(Agent.Decision_Agent)
 
@@ -24,6 +25,9 @@ class DecisionAgent:
 
     async def accept_message(self, agent, message):
         print(f"{agent=},{message=}")
+        action = gen_action()
+        await self.display(action.to_dict())
+        await self.publish(Agent.Performance_Analysing_Agent, action.to_dict())
 
     async def stop(self, *args, **kwargs):
         pass
