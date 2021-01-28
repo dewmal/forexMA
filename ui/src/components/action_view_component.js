@@ -9,8 +9,8 @@ const ActionViewComponent = ({ allActions }) => {
 		<>
 			Action View
 			<ul>
-				<li>Time, Action, Price Variation, Accuracy</li>
-				{allActions.map((v) => <li>{v.time_stamp}, {v.predicted_action}, {v.predicted_price_variation}, {v.accuracy}</li>)}
+				<li>Time, End Time, Action, Price Variation, Accuracy</li>
+				{allActions.map((v) => <li>{v.time_stamp}, {v.action_end_time}, {v.predicted_action}, {v.predicted_price_variation}, {v.accuracy}</li>)}
 			</ul>
 		</>
 	);

@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import { ADD_MARKET_ACTION, 
     ADD_MARKET_STATE_PRICE, 
     ADD_MARKET_STATE_TEXT, 
-    ADD_MARKET_FACT_QUANTITATIVE, ADD_MARKET_FACT_QUALITATIVE } from "../redux/actionTypes";
+    ADD_MARKET_FACT_QUANTITATIVE, ADD_MARKET_FACT_QUALITATIVE,ADD_PREDICTION_PERFORMANCE } from "../redux/actionTypes";
 
 const connectSocket = async (store) => {
     const socket = io("ws://127.0.0.1:7878", {
@@ -58,6 +58,17 @@ const connectSocket = async (store) => {
             payload: [message.body.message]
         })
     });
+
+    
+
+    socket.on('PerformanceAnalysingAgent', (message) => {
+        console.log(message);
+        store.dispatch({
+            type: ADD_PREDICTION_PERFORMANCE,
+            payload: [message.body.message]
+        })
+    });
+
 }
 
 export const startSocketIO = (store) => {
