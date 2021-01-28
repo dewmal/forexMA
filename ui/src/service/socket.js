@@ -1,13 +1,13 @@
 import io from "socket.io-client";
-import { ADD_MARKET_ACTION } from "../redux/actionTypes";
+import { ADD_MARKET_ACTION, ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT } from "../redux/actionTypes";
 
-const connectSocket = async(store) => {
+const connectSocket = async (store) => {
     const socket = io("ws://127.0.0.1:7878", {
         transports: ["websocket", "polling"],
         jsonp: true,
         forceNew: true,
     });
-    socket.on("connect", function() {
+    socket.on("connect", function () {
         console.log("Working")
     })
     socket.on("connect_error", err => {
@@ -17,8 +17,24 @@ const connectSocket = async(store) => {
     });
     socket.on('DecisionAgent', (message) => {
         store.dispatch({
-            type:ADD_MARKET_ACTION,
-            payload:[message.body.message]
+            type: ADD_MARKET_ACTION,
+            payload: [message.body.message]
+        })
+    });
+
+
+    socket.on('PriceReadingAgent', (message) => {
+        store.dispatch({
+            type: ADD_MARKET_STATE_PRICE,
+            payload: [message.body.message]
+        })
+    });
+
+
+    socket.on('NewsReadingAgent', (message) => {
+        store.dispatch({
+            type: ADD_MARKET_STATE_TEXT,
+            payload: [message.body.message]
         })
     });
 }

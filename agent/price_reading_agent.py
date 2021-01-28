@@ -33,4 +33,5 @@ class PriceReadingAgent:
         while True:
             status = gen_market_status()
             await self.publish(Agent.Quantitative_FAAgent, status.to_dict())
+            await self.display(status.to_dict())
             await asyncio.sleep(2)
