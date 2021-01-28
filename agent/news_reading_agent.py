@@ -33,4 +33,4 @@ class NewsReadingAgent:
         while True:
             status = gen_market_text_data()
             await self.publish(Agent.Qualitative_FAAgent, status.to_dict())
-            await asyncio.sleep(2)
+            await asyncio.sleep(50)

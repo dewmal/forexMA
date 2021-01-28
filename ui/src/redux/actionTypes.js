@@ -1,2 +1,3 @@
 //
 export const ADD_DEPTH_STATE = "ADD_DEPTH_STATE"
+export const ADD_MARKET_ACTION = "ADD_MARKET_ACTION"
