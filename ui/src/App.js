@@ -6,6 +6,8 @@ import store from './redux/store'
 import ActionViewComponent from './components/action_view_component';
 import MarketPriceViewCompoennt from "./components/market_status_price_view_component";
 import MarketNewsViewCompoennt from "./components/market_status_news_view_component";
+import MarketQualitativeFactViewCompoennt from "./components/market_qualitative_facts_view_component";
+import MarketQuantitativeFactViewCompoennt  from "./components/market_quantitative_facts_view_component";
 
 class App extends Component {
   componentWillMount() {
@@ -18,6 +20,8 @@ class App extends Component {
         <ActionViewComponent />
         <MarketPriceViewCompoennt />
         <MarketNewsViewCompoennt />
+        <MarketQuantitativeFactViewCompoennt />
+        <MarketQualitativeFactViewCompoennt/>
       </div>
 
     );

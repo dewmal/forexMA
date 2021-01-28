@@ -1,5 +1,8 @@
 import io from "socket.io-client";
-import { ADD_MARKET_ACTION, ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT } from "../redux/actionTypes";
+import { ADD_MARKET_ACTION, 
+    ADD_MARKET_STATE_PRICE, 
+    ADD_MARKET_STATE_TEXT, 
+    ADD_MARKET_FACT_QUANTITATIVE, ADD_MARKET_FACT_QUALITATIVE } from "../redux/actionTypes";
 
 const connectSocket = async (store) => {
     const socket = io("ws://127.0.0.1:7878", {
@@ -34,6 +37,24 @@ const connectSocket = async (store) => {
     socket.on('NewsReadingAgent', (message) => {
         store.dispatch({
             type: ADD_MARKET_STATE_TEXT,
+            payload: [message.body.message]
+        })
+    });
+
+
+
+    socket.on('QuantitativeFAAgent', (message) => {
+        store.dispatch({
+            type: ADD_MARKET_FACT_QUANTITATIVE,
+            payload: [message.body.message]
+        })
+    });
+
+
+
+    socket.on('QualitativeFAAgent', (message) => {
+        store.dispatch({
+            type: ADD_MARKET_FACT_QUALITATIVE,
             payload: [message.body.message]
         })
     });
