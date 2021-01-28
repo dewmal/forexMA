@@ -26,6 +26,8 @@ class QualitativeFAAgent:
     async def accept_message(self, agent, message):
         print(f"{agent=} {message=}")
         pattern = gen_fact_pattern()
+
+        await self.display(pattern.to_dict())
         await self.publish(Agent.Decision_Agent, pattern.to_dict())
 
     async def stop(self, *args, **kwargs):
