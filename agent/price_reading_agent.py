@@ -37,7 +37,7 @@ class PriceReadingAgent:
             await websocket.send(json.dumps({
                 "ticks_history": "frxEURUSD",
                 "adjust_start_time": 1,
-                "count": 3,
+                "count": 50,
                 "end": "latest",
                 "start": 1,
                 "style": "candles",
