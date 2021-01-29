@@ -35,6 +35,7 @@ async def websocket_connect(uri, payload, consumer):
                         await consumer(message)
                     except Exception as e:
                         log_app_error(e)
+                        continue
         except Exception as e:
             log_app_error(e)
             log.info('Error receiving message from websocket.')
