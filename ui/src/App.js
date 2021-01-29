@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="container lg h-screen bg-black text-white">
         <ActionViewComponent />
         <MarketPriceViewCompoennt />
         <MarketNewsViewCompoennt />
