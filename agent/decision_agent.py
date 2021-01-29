@@ -71,6 +71,7 @@ class DecisionAgent:
     async def pattern_analysis(self, agent, pattern: FactPattern):
         action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
         if action:
+            print(f"{action.to_dict()=}")
             self.decisions_history[f"{action.action_end_time}"] = action
             await self.display(action.to_dict())
             await self.publish(Agent.Performance_Analysing_Agent, action.to_dict())

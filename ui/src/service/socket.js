@@ -19,6 +19,7 @@ const connectSocket = async (store) => {
         console.log(err.data); // { content: "Please retry later" }
     });
     socket.on('DecisionAgent', (message) => {
+        console.log(message);
         store.dispatch({
             type: ADD_MARKET_ACTION,
             payload: [message.body.message]
@@ -62,7 +63,6 @@ const connectSocket = async (store) => {
     
 
     socket.on('PerformanceAnalysingAgent', (message) => {
-        console.log(message);
         store.dispatch({
             type: ADD_PREDICTION_PERFORMANCE,
             payload: [message.body.message]

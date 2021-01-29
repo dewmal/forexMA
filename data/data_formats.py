@@ -127,7 +127,7 @@ class Action:
     accuracy: float
     _id: str = ""
     actual_price: float = 0
-    reward: float = -math.inf
+    reward: float = None
 
     def to_dict(self):
         dt = {
