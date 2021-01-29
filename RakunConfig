@@ -20,9 +20,12 @@ agents:
     code: agent/quantitative_facts_analysing_agent.py
 
   # Facts collecting Agents
+#  price_reading_agent: # Qualitative Agent
+#    name: PriceReadingAgent
+#    code: agent/price_reading_agent.py
   price_reading_agent: # Qualitative Agent
     name: PriceReadingAgent
-    code: agent/price_reading_agent.py
+    code: agent/test_price_reading_agent.py
   news_reading_agent: # Quantitative Agent
     name: NewsReadingAgent
     code: agent/news_reading_agent.py
