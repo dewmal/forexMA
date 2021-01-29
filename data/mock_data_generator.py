@@ -41,7 +41,7 @@ def gen_action(time_stamp, asset_name):
         status = Action(
             time_stamp=time_stamp,
             asset_name=asset_name,
-            accuracy=random.random(),
+            accuracy=random.random() * 100,
             action_end_time=(duration * 60) + time_stamp,
             predicted_action=random.choice((MarketDirection.SELL, MarketDirection.BUY, MarketDirection.STAY)),
             predicted_price_variation=round(random.random() * 100),

@@ -70,7 +70,7 @@ class DecisionAgent:
     @message_filter(message_type=MarketStatus, param_name="pattern")
     async def pattern_analysis(self, agent, pattern: FactPattern):
         action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
-        if action:
+        if action and action.accuracy > 75:
             print(f"{action.to_dict()=}")
             self.decisions_history[f"{action.action_end_time}"] = action
             await self.display(action.to_dict())
