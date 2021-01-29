@@ -1,10 +1,8 @@
-import asyncio
-
 import logging
 
 from agent import Agent
 from agent_helpers import message_filter
-from data.data_formats import FactPattern, MarketStatus, Action, MarketDirection, AgentPerformance
+from data.data_formats import FactPattern, MarketStatus, Action, MarketDirection
 from data.mock_data_generator import gen_action
 
 log = logging.getLogger(Agent.Decision_Agent)
@@ -21,6 +19,8 @@ class DecisionAgent:
     decisions_history = {}
     market_data = {}
 
+    open_decision = False
+
     def __init__(self, *args, **kwargs):
         log.info(f"{self} Start")
 
@@ -29,8 +29,8 @@ class DecisionAgent:
         pass
 
     async def accept_message(self, agent, message):
-        await self.pattern_analysis(agent=agent, pattern=message)
         await self.market_status(agent=agent, status=message)
+        await self.pattern_analysis(agent=agent, pattern=message)
 
     async def stop(self, *args, **kwargs):
         pass
@@ -66,12 +66,16 @@ class DecisionAgent:
                 action.actual_price = status.close
 
                 await self.publish(Agent.Performance_Analysing_Agent, action)
+                self.open_decision = False
 
     @message_filter(message_type=MarketStatus, param_name="pattern")
     async def pattern_analysis(self, agent, pattern: FactPattern):
+        if self.open_decision:
+            return
         action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
         if action and action.accuracy > 75:
             print(f"{action.to_dict()=}")
             self.decisions_history[f"{action.action_end_time}"] = action
             await self.display(action.to_dict())
             await self.publish(Agent.Performance_Analysing_Agent, action.to_dict())
+            self.open_decision = True

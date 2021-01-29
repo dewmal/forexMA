@@ -1,9 +1,10 @@
 import asyncio
-
 import logging
+import pandas as pd
+from click import open_file
 
 from agent import Agent
-from data.mock_data_generator import gen_market_status, gen_market_text_data
+from data.data_formats import TextData
 
 log = logging.getLogger(Agent.News_Reading_Agent)
 
@@ -20,8 +21,7 @@ class NewsReadingAgent:
         log.info(f"{self} Start")
 
     async def start(self):
-        # await self.publish("AgentTwo", "Hi Agent 2")
-        pass
+        self.df = pd.read_csv("_data_/data/news/USD-EUR_16-17.csv")
 
     async def accept_message(self, agent, message):
         pass
@@ -30,8 +30,21 @@ class NewsReadingAgent:
         pass
 
     async def execute(self, *args, **kwargs):
-        while True:
-            status = gen_market_text_data()
+        print("Reading news")
+        for news_dt in self.df.News.values:
+            status = TextData(
+                time_stamp=-1,
+                text=f"{str(news_dt)}"
+            )
             await self.publish(Agent.Qualitative_FAAgent, status.to_dict())
             await self.display(status.to_dict())
-            await asyncio.sleep(50)
+            await asyncio.sleep(2)
+
+        # news = df.News[0]
+        # print(f"{news=}")
+
+        # while True:
+        #     status = gen_market_text_data()
+        #     await self.publish(Agent.Qualitative_FAAgent, status.to_dict())
+        #     await self.display(status.to_dict())
+        #     await asyncio.sleep(50)

@@ -1,11 +1,11 @@
 import asyncio
 
 import logging
-
+import numpy as np
 from agent import Agent
 from agent_helpers import message_filter
-from data.data_formats import MarketStatus, TextData
-from data.mock_data_generator import gen_fact_pattern
+from data.data_formats import MarketStatus, TextData, MarketDirection
+from simpletransformers.classification import ClassificationModel
 
 log = logging.getLogger(Agent.Qualitative_FAAgent)
 
@@ -19,7 +19,9 @@ class QualitativeFAAgent:
     display = None
 
     def __init__(self, *args, **kwargs):
-        log.info(f"{self} Start")
+        self.model = ClassificationModel('bert', 'model_data/qualitative/checkpoint-484-epoch-1', num_labels=3,
+                                         args={'reprocess_input_data': False, 'overwrite_output_dir': False},
+                                         use_cuda=False)
 
     async def start(self):
         # await self.publish("AgentTwo", "Hi Agent 2")
@@ -37,8 +39,17 @@ class QualitativeFAAgent:
 
     @message_filter(message_type=TextData, param_name="status")
     async def qualitative_facts_analysis(self, agent, status: TextData):
-        print(f"{agent=},{status=}")
+        res = self.get_result(status.text)
+        print(f"{res=}")
 
     @message_filter(message_type=MarketStatus, param_name="status")
     async def market_status(self, agent, status: MarketStatus):
         pass
+
+    def get_result(self, statement):
+        result = self.model.predict([statement])
+        pos = np.where(result[1][0] == np.amax(result[1][0]))
+        pos = int(pos[0])
+        sentiment_dict = {0: MarketDirection.BUY, 1: MarketDirection.SELL, 2: MarketDirection.STAY}
+        log.info(f"{sentiment_dict[pos]}")
+        return sentiment_dict[pos]

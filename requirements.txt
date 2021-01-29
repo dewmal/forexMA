@@ -1,3 +1,10 @@
 websockets
 pandas
 numpy
+tqdm
+matplotlib
+torch
+torchvision
+simpletransformers
+wandb
+tokenizers==0.9.4
