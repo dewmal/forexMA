@@ -70,8 +70,6 @@ class DecisionAgent:
 
     @message_filter(message_type=MarketStatus, param_name="pattern")
     async def pattern_analysis(self, agent, pattern: FactPattern):
-        if self.open_decision:
-            return
         action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
         if action and action.accuracy > 75:
             print(f"{action.to_dict()=}")

@@ -36,7 +36,7 @@ class NewsReadingAgent:
                 time_stamp=-1,
                 text=f"{str(news_dt)}"
             )
-            await self.publish(Agent.Qualitative_FAAgent, status.to_dict())
+            await self.publish(Agent.Qualitative_FAAgent, status)
             await self.display(status.to_dict())
             await asyncio.sleep(2)
 

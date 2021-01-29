@@ -19,13 +19,12 @@ class QualitativeFAAgent:
     display = None
 
     def __init__(self, *args, **kwargs):
+        pass
+
+    async def start(self):
         self.model = ClassificationModel('bert', 'model_data/qualitative/checkpoint-484-epoch-1', num_labels=3,
                                          args={'reprocess_input_data': False, 'overwrite_output_dir': False},
                                          use_cuda=False)
-
-    async def start(self):
-        # await self.publish("AgentTwo", "Hi Agent 2")
-        pass
 
     async def accept_message(self, agent, message):
         await self.qualitative_facts_analysis(agent=agent, status=message)
@@ -50,6 +49,5 @@ class QualitativeFAAgent:
         result = self.model.predict([statement])
         pos = np.where(result[1][0] == np.amax(result[1][0]))
         pos = int(pos[0])
-        sentiment_dict = {0: MarketDirection.BUY, 1: MarketDirection.SELL, 2: MarketDirection.STAY}
-        log.info(f"{sentiment_dict[pos]}")
+        sentiment_dict = {0: MarketDirection.STAY, 1: MarketDirection.SELL, 2: MarketDirection.BUY}
         return sentiment_dict[pos]
