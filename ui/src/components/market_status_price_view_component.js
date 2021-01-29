@@ -39,7 +39,7 @@ const MarketPriceViewCompoennt = ({ prices }) => {
 				]}
 				options={{
 					legend: 'none',
-					backgroundColor:"#ffe4e4e4",
+					backgroundColor:"#e5e5e5",
 					candlestick: {
 						fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
 						risingColor: { strokeWidth: 0, fill: '#0f9d58' }, // green

@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container lg h-screen bg-black text-gray-200 font-mono">
+      <div className="container lg h-screen bg-gray-900 text-gray-300 font-mono">
         <div className="grid grid-cols-3">
 
           <div className="col-span-2 gap-4">
