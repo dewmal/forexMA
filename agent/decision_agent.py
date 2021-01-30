@@ -68,10 +68,12 @@ class DecisionAgent:
                 await self.publish(Agent.Performance_Analysing_Agent, action)
                 self.open_decision = False
 
-    @message_filter(message_type=MarketStatus, param_name="pattern")
+    @message_filter(message_type=FactPattern, param_name="pattern")
     async def pattern_analysis(self, agent, pattern: FactPattern):
-        action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name)
-        if action and action.accuracy > 75:
+        if pattern.accuracy > 80:
+            action = gen_action(time_stamp=pattern.time_stamp, asset_name=pattern.asset_name,
+                                direction=pattern.direction, accuracy=pattern.accuracy,
+                                price_change=pattern.expected_change)
             print(f"{action.to_dict()=}")
             self.decisions_history[f"{action.action_end_time}"] = action
             await self.display(action.to_dict())

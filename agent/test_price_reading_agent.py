@@ -67,6 +67,6 @@ class PriceReadingAgent:
             await self.publish(Agent.Performance_Analysing_Agent, market_status)
             await self.publish(Agent.Decision_Agent, market_status)
             await self.display(market_status.to_dict())
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.002)
 
         # await self.exit()

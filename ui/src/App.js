@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container lg h-screen bg-gray-900 text-gray-300 font-mono">
+      <div className="lg h-full w-full bg-gray-900 text-gray-300 font-mono">
         <div className="grid grid-cols-3">
 
           <div className="col-span-2 gap-4">
@@ -25,9 +25,7 @@ class App extends Component {
           <div>
             <ActionViewComponent />
           </div>
-          <div className="col-span-3">
-            <MarketNewsViewCompoennt />
-          </div>
+
           <div>
             <MarketQuantitativeFactViewCompoennt />
           </div>
@@ -38,6 +36,11 @@ class App extends Component {
           <div>
             <MarketQualitativeFactViewCompoennt />
           </div>
+
+          <div className="col-span-3">
+            <MarketNewsViewCompoennt />
+          </div>
+
 
 
 
