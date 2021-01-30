@@ -9,9 +9,9 @@ const MarketNewsViewCompoennt = ({ texts }) => {
 	
 		<ul>
 			<li>Time, Text</li>
-			{texts.map((text) => <li>
+			{texts.length > 0 ? [texts[0]].map((text) => <li>
 				{text.time_stamp}, {text.text}
-			</li>)}
+			</li>) : <span></span>}
 		</ul>
 	</>);
 }

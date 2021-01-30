@@ -1,7 +1,7 @@
 import { ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT } from "../actionTypes";
 
 const initState = {
-	maxHistoryLength: 5,
+	maxHistoryLength: 50,
 	prices: [],
 	texts: []
 }

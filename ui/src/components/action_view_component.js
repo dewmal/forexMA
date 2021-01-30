@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import { ArrowUpSolid, ArrowDownSolid, DotsHorizontalOutline } from '@graywolfai/react-heroicons'
-
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 const ActionViewComponent = ({ allActions }) => {
 	return (
 		<div className="p-4">
@@ -18,12 +18,12 @@ const ActionViewComponent = ({ allActions }) => {
 						</span >
 
 						<div className="flex-auto p-3">
-							<h4 className="text-xl">{v.predicted_price_variation}</h4>
-							<h6 className="text-sm">{v.accuracy}</h6>
+							<h4 className="text-xl">{v.predicted_price_variation} Pips</h4>
+							<h6 className="text-sm">{v.accuracy}%</h6>
 
 
 							<div className="text-sm">
-								{new Date(v.time_stamp * 1000).toLocaleString()}, {new Date(v.action_end_time * 1000).toLocaleString()}
+								{new Date(v.time_stamp * 1000).toLocaleTimeString()}, {new Date(v.action_end_time * 1000).toLocaleTimeString()}
 							</div>
 
 						</div>

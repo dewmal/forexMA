@@ -1,7 +1,7 @@
 import { ADD_MARKET_ACTION } from "../actionTypes";
 
 const initState = {
-    pastActions: 5,
+    pastActions: 3,
     allActions: []
 }
 
