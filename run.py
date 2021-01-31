@@ -42,14 +42,14 @@ class AgentWrapper:
         self._agent_.display = self.display
 
     async def start_agent(self):
-        if self._agent_.start:
+        if hasattr(self._agent_, "start"):
             try:
                 await self._agent_.start()
             except Exception as e:
                 log.exception(e)
 
     async def stop_agent(self):
-        if self._agent_.stop:
+        if hasattr(self._agent_, "stop"):
             try:
                 log.info(f"AGENT CLOSE REQUEST {self.id}")
                 await self._agent_.stop()
@@ -57,17 +57,18 @@ class AgentWrapper:
                 log.exception(e)
 
     async def execute_agent(self):
-        if self._agent_.execute:
+        if hasattr(self._agent_, "execute"):
             try:
                 await self._agent_.execute()
             except Exception as e:
                 log.exception(e)
 
     async def accept_message(self, channel, message):
-        try:
-            await self._agent_.accept_message(agent=channel, message=message)
-        except Exception as e:
-            log.exception(e)
+        if hasattr(self._agent_, "accept_message"):
+            try:
+                await self._agent_.accept_message(agent=channel, message=message)
+            except Exception as e:
+                log.exception(e)
 
 
 class PubSub:
