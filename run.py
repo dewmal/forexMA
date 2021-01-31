@@ -42,23 +42,26 @@ class AgentWrapper:
         self._agent_.display = self.display
 
     async def start_agent(self):
-        try:
-            await self._agent_.start()
-        except Exception as e:
-            log.exception(e)
+        if self._agent_.start:
+            try:
+                await self._agent_.start()
+            except Exception as e:
+                log.exception(e)
 
     async def stop_agent(self):
-        try:
-            log.info(f"AGENT CLOSE REQUEST {self.id}")
-            await self._agent_.stop()
-        except Exception as e:
-            log.exception(e)
+        if self._agent_.stop:
+            try:
+                log.info(f"AGENT CLOSE REQUEST {self.id}")
+                await self._agent_.stop()
+            except Exception as e:
+                log.exception(e)
 
     async def execute_agent(self):
-        try:
-            await self._agent_.execute()
-        except Exception as e:
-            log.exception(e)
+        if self._agent_.execute:
+            try:
+                await self._agent_.execute()
+            except Exception as e:
+                log.exception(e)
 
     async def accept_message(self, channel, message):
         try:
