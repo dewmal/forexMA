@@ -9,6 +9,8 @@ import MarketNewsViewCompoennt from "./components/market_status_news_view_compon
 import MarketQualitativeFactViewCompoennt from "./components/market_qualitative_facts_view_component";
 import MarketQuantitativeFactViewCompoennt from "./components/market_quantitative_facts_view_component";
 
+import MarketTrendViewComponent from "./components/market_trend_view_component"
+
 class App extends Component {
   componentWillMount() {
     startSocketIO(store);
@@ -18,6 +20,11 @@ class App extends Component {
     return (
       <div className="lg h-full w-full bg-gray-900 text-gray-300 font-mono">
         <div className="grid grid-cols-3">
+
+
+          <div>
+            <MarketTrendViewComponent/>
+          </div>
 
           <div className="col-span-2 gap-4">
             <MarketPriceViewCompoennt />
