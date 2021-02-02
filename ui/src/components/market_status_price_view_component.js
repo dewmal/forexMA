@@ -7,32 +7,39 @@ import * as echarts from 'echarts';
 
 const ChartView = ({ prices }) => {
 	const refChart = useRef()
+	const [chart, setChart] = useState()
 
 	useEffect(() => {
-
 		if (refChart) {
 			console.log(refChart);
 			var myChart = echarts.init(refChart.current);
+			setChart(myChart)
+		}
+	}, [refChart]);
+
+	useEffect(() => {
+		if (chart && prices) {
 			let option = {
 				xAxis: {
-					data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
+					data: prices.map((p) => new Date(p.time_stamp * 1000).toLocaleTimeString())
 				},
-				yAxis: {},
+				yAxis: {
+					scale: true,
+					splitArea: {
+						show: true
+					}
+				},
 				series: [{
 					type: 'k',
-					data: [
-						[20, 34, 10, 38],
-						[40, 35, 30, 50],
-						[31, 38, 33, 44],
-						[38, 15, 5, 42]
-					]
+					data: prices.map((p) => [p.open, p.close, p.low, p.high])
 				}]
 			};
-			myChart.setOption(option);
+			chart.setOption(option);
 		}
 
+	}, [chart, prices]);
 
-	}, [refChart]);
+
 
 
 	return (
@@ -72,25 +79,6 @@ const MarketPriceViewCompoennt = ({ prices }) => {
 			</ul>
 				:
 				<ChartView prices={prices} />
-			// <Chart
-			// 	width={'100%'}
-			// 	height={350}
-			// 	chartType="CandlestickChart"
-			// 	loader={<div>Loading Chart</div>}
-			// 	data={[
-			// 		['time', 'open', 'high', 'low', 'close'],
-			// 		...prices.map((d) => ["" + new Date(d.time_stamp * 1000).toLocaleTimeString(), d.low, d.open, d.close, d.high])
-			// 	]}
-			// 	options={{
-			// 		legend: 'none',
-			// 		backgroundColor: "#e5e5e5",
-			// 		candlestick: {
-			// 			fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
-			// 			risingColor: { strokeWidth: 0, fill: '#0f9d58' }, // green
-			// 		},
-			// 	}}
-			// 	rootProps={{ 'data-testid': '1' }}
-			// />
 			: <span>Please wait</span>}
 	</div>);
 }
