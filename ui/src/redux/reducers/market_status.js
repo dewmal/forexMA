@@ -1,6 +1,7 @@
 import { ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT } from "../actionTypes";
 
 const initState = {
+	asset: '1INCHUSDT',
 	maxHistoryLength: 50,
 	prices: [],
 	texts: []

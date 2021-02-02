@@ -5,6 +5,8 @@ import Chart from "react-google-charts";
 
 
 const MarketPriceViewCompoennt = ({ prices }) => {
+	const [asset, setAsset] = useState('1INCHUSDT');
+	const [priceList,setPriceList] = useState([])
 	const [showTable, setShowTable] = useState(false);
 
 	return (<div className="p-4">

@@ -27,7 +27,7 @@ const connectSocket = async (store) => {
     });
 
 
-    socket.on('PriceReadingAgent', (message) => {
+    socket.on('CryptoReadingAgent', (message) => {
         store.dispatch({
             type: ADD_MARKET_STATE_PRICE,
             payload: [message.body.message]
