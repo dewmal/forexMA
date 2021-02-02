@@ -31,14 +31,14 @@ class NewsReadingAgent:
 
     async def execute(self, *args, **kwargs):
         print("Reading news")
-        for news_dt in self.df.News.values:
-            status = TextData(
-                time_stamp=-1,
-                text=f"{str(news_dt)}"
-            )
-            await self.publish(Agent.Qualitative_FAAgent, status)
-            await self.display(status.to_dict())
-            await asyncio.sleep(2)
+        # for news_dt in self.df.News.values:
+        #     status = TextData(
+        #         time_stamp=-1,
+        #         text=f"{str(news_dt)}"
+        #     )
+        #     await self.publish(Agent.Qualitative_FAAgent, status)
+        #     await self.display(status.to_dict())
+        #     await asyncio.sleep(2)
 
         # news = df.News[0]
         # print(f"{news=}")

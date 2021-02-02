@@ -5,3 +5,4 @@ class Agent:
     Qualitative_FAAgent = "QualitativeFAAgent"
     Performance_Analysing_Agent = "PerformanceAnalysingAgent"
     Decision_Agent = "DecisionAgent"
+    Crypto_Reading_Agent = "CryptoReadingAgent"

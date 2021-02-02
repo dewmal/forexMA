@@ -23,9 +23,12 @@ agents:
 #  price_reading_agent: # Qualitative Agent
 #    name: PriceReadingAgent
 #    code: agent/price_reading_agent.py
-  price_reading_agent: # Qualitative Agent
-    name: PriceReadingAgent
-    code: agent/test_price_reading_agent.py
+#  price_reading_agent: # Qualitative Agent
+#    name: PriceReadingAgent
+#    code: agent/test_price_reading_agent.py
+  crypto_reading_agent: # Qualitative Agent
+    name: CryptoReadingAgent
+    code: agent/crypto_reading_agent.py
   news_reading_agent: # Quantitative Agent
     name: NewsReadingAgent
     code: agent/news_reading_agent.py

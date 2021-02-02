@@ -15,7 +15,7 @@ def log_app_error(e: BaseException, level=logging.ERROR) -> None:
     log.log(level, traceback_lines.__str__())
 
 
-async def websocket_connect(uri, payload, consumer):
+async def websocket_connect(uri, payload: str, consumer):
     websocket = await websockets.connect(uri, ssl=True)
     if payload:
         await websocket.send(json.dumps(payload))
@@ -24,7 +24,7 @@ async def websocket_connect(uri, payload, consumer):
             try:
                 log.info('Websocket is NOT connected. Reconnecting...')
                 websocket = await websockets.connect(uri, ssl=True)
-                await websocket.send(payload)
+                await websocket.send(json.dumps(payload))
             except Exception as e:
                 log_app_error(e)
                 log.info('Unable to reconnect, trying again.')
@@ -32,7 +32,7 @@ async def websocket_connect(uri, payload, consumer):
             async for message in websocket:
                 if message is not None:
                     try:
-                        await consumer(message)
+                        await consumer(json.loads(message))
                     except Exception as e:
                         log_app_error(e)
                         continue
