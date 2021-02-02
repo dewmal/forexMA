@@ -1,12 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import Chart from "react-google-charts";
 
+import * as echarts from 'echarts';
+
+
+const ChartView = ({ prices }) => {
+	const refChart = useRef()
+
+	useEffect(() => {
+
+		if (refChart) {
+			console.log(refChart);
+			var myChart = echarts.init(refChart.current);
+			let option = {
+				xAxis: {
+					data: ['2017-10-24', '2017-10-25', '2017-10-26', '2017-10-27']
+				},
+				yAxis: {},
+				series: [{
+					type: 'k',
+					data: [
+						[20, 34, 10, 38],
+						[40, 35, 30, 50],
+						[31, 38, 33, 44],
+						[38, 15, 5, 42]
+					]
+				}]
+			};
+			myChart.setOption(option);
+		}
+
+
+	}, [refChart]);
+
+
+	return (
+		<>
+			Chart
+			<div className="w-auto h-48" style={{ height: "300px" }} ref={refChart}></div>
+		</>
+	);
+}
 
 
 const MarketPriceViewCompoennt = ({ prices }) => {
 	const [asset, setAsset] = useState('1INCHUSDT');
-	const [priceList,setPriceList] = useState([])
+	const [priceList, setPriceList] = useState([])
 	const [showTable, setShowTable] = useState(false);
 
 	return (<div className="p-4">
@@ -29,27 +69,30 @@ const MarketPriceViewCompoennt = ({ prices }) => {
 				{p.volume},
 
 			</li>)}
+
+
 			</ul>
 				:
-				<Chart
-					width={'100%'}
-					height={350}
-					chartType="CandlestickChart"
-					loader={<div>Loading Chart</div>}
-					data={[
-						['time', 'open', 'high', 'low', 'close'],
-						...prices.map((d) => ["" + new Date(d.time_stamp * 1000).toLocaleTimeString(), d.low, d.open, d.close, d.high])
-					]}
-					options={{
-						legend: 'none',
-						backgroundColor: "#e5e5e5",
-						candlestick: {
-							fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
-							risingColor: { strokeWidth: 0, fill: '#0f9d58' }, // green
-						},
-					}}
-					rootProps={{ 'data-testid': '1' }}
-				/>
+				<ChartView prices={prices} />
+			// <Chart
+			// 	width={'100%'}
+			// 	height={350}
+			// 	chartType="CandlestickChart"
+			// 	loader={<div>Loading Chart</div>}
+			// 	data={[
+			// 		['time', 'open', 'high', 'low', 'close'],
+			// 		...prices.map((d) => ["" + new Date(d.time_stamp * 1000).toLocaleTimeString(), d.low, d.open, d.close, d.high])
+			// 	]}
+			// 	options={{
+			// 		legend: 'none',
+			// 		backgroundColor: "#e5e5e5",
+			// 		candlestick: {
+			// 			fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
+			// 			risingColor: { strokeWidth: 0, fill: '#0f9d58' }, // green
+			// 		},
+			// 	}}
+			// 	rootProps={{ 'data-testid': '1' }}
+			// />
 			: <span>Please wait</span>}
 	</div>);
 }
