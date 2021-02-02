@@ -6,3 +6,4 @@ class Agent:
     Performance_Analysing_Agent = "PerformanceAnalysingAgent"
     Decision_Agent = "DecisionAgent"
     Crypto_Reading_Agent = "CryptoReadingAgent"
+    Market_Trend_Analysing_Agent = "MarketTrendAnalysingAgent"

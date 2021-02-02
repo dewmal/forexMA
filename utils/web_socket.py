@@ -15,7 +15,7 @@ def log_app_error(e: BaseException, level=logging.ERROR) -> None:
     log.log(level, traceback_lines.__str__())
 
 
-async def websocket_connect(uri, payload: str, consumer):
+async def websocket_connect(uri, payload, consumer):
     websocket = await websockets.connect(uri, ssl=True)
     if payload:
         await websocket.send(json.dumps(payload))
