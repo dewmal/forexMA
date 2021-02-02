@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as numeral from 'numeral'
+
 
 const TrendTableView = ({ trends }) => {
 	return (<>
@@ -13,36 +15,24 @@ const TrendTableView = ({ trends }) => {
 			</thead>
 			<tbody>
 				{trends.map((trend) =>
-
-					<tr>
+					<tr className="space-y-2">
 						<td><a target="blank" href={"https://www.binance.com/en/trade/" + trend.name + "?layout=pro"}>{trend.name}</a></td>
-						<td>{trend.change}</td>
+						<td>{numeral(trend.change).format("00.00%")}</td>
 						<td>{trend.length}</td>
 					</tr>
 
 				)}
-
 			</tbody>
 		</table>
-
-
-
-
-
 	</>);
 }
 
 const MarketTrendViewComponent = ({ trends }) => {
 	return (
 		<div className="p-2">
-			Market Trend
+			<h3 className="text-sm">Market Trends</h3>
 			<ul>
-				<TrendTableView trends={(trends.map((t) => {
-					return {
-						...t,
-						change: Math.round(t.change * 10000) / 100
-					}
-				}).sort((a, b) => b.change - a.change))} />
+				<TrendTableView trends={(trends.sort((a, b) => b.change - a.change))} />
 			</ul>
 		</div>
 	);
