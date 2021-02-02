@@ -59,4 +59,4 @@ class CryptoReadingAgent:
                 ],
             "id": 1
         }, self.read_asset_market_price)
-        await asyncio.wait([all_market_data_reader], return_when=asyncio.ALL_COMPLETED)
+        await asyncio.wait([all_market_data_reader, read_market_price], return_when=asyncio.ALL_COMPLETED)
