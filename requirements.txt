@@ -8,3 +8,4 @@ torchvision
 simpletransformers
 wandb
 tokenizers==0.9.4
+aiohttp

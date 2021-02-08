@@ -51,6 +51,7 @@ class CryptoReadingAgent:
     async def execute(self, *args, **kwargs):
         uri = "wss://stream.binance.com:9443/ws"
         all_market_data_reader = websocket_connect(f"{uri}/!ticker@arr", None, self.all_market_price)
+        # all_market_data_reader = websocket_connect(f"{uri}/!bookTicker", None, self.all_market_price)
         read_market_price = websocket_connect(f"{uri}", {
             "method": "SUBSCRIBE",
             "params":
@@ -59,4 +60,4 @@ class CryptoReadingAgent:
                 ],
             "id": 1
         }, self.read_asset_market_price)
-        await asyncio.wait([all_market_data_reader, read_market_price], return_when=asyncio.ALL_COMPLETED)
+        await asyncio.wait([all_market_data_reader], return_when=asyncio.ALL_COMPLETED)
