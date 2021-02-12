@@ -2,6 +2,7 @@ import io from "socket.io-client";
 import {
     ADD_MARKET_STATE_PRICE,
     ADD_MARKET_TRENDS,
+    ADD_MARKET_EQUILIBRIUM
 } from "../redux/actionTypes";
 
 const connectSocket = async (store) => {
@@ -31,7 +32,12 @@ const connectSocket = async (store) => {
             payload: message.body.message
         })
     });
-
+    socket.on('MarketEquilibriumAnalysingAgent', (message) => {
+        store.dispatch({
+            type: ADD_MARKET_EQUILIBRIUM,
+            payload: message.body.message
+        })
+    });
 }
 
 export const startSocketIO = (store) => {

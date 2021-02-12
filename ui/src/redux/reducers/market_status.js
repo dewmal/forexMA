@@ -1,15 +1,25 @@
-import { ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT,ADD_MARKET_TRENDS } from "../actionTypes";
+import { ADD_MARKET_STATE_PRICE, ADD_MARKET_STATE_TEXT,ADD_MARKET_TRENDS,ADD_MARKET_EQUILIBRIUM } from "../actionTypes";
 
 const initState = {
 	asset: '1INCHUSDT',
 	maxHistoryLength: 50,
 	prices: [],
 	texts: [],
-	trends:[]
+	trends:[],
+	equilibriums :[]
 }
 
 const MarketStatus = (state = initState, action) => {	
-	switch (action.type) {		
+	switch (action.type) {	
+			
+		case ADD_MARKET_EQUILIBRIUM: {
+			return {
+				...state,
+				equilibriums : [
+					...action.payload
+				]
+			}
+		}	
 		case ADD_MARKET_TRENDS: {
 			return {
 				...state,

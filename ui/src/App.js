@@ -8,6 +8,7 @@ import MarketPriceViewCompoennt from "./components/market_status_price_view_comp
 import MarketNewsViewCompoennt from "./components/market_status_news_view_component";
 import MarketQualitativeFactViewCompoennt from "./components/market_qualitative_facts_view_component";
 import MarketQuantitativeFactViewCompoennt from "./components/market_quantitative_facts_view_component";
+import MarketFastMoverViewComponent from "./components/market_fast_movers_view_component";
 
 import MarketTrendViewComponent from "./components/market_trend_view_component"
 
@@ -27,7 +28,7 @@ class App extends Component {
           </div>
 
           <div className="col-span-2 gap-4">
-            <MarketPriceViewCompoennt />
+           <MarketFastMoverViewComponent/>
           </div>
           <div>
             <ActionViewComponent />
