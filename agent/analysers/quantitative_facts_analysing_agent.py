@@ -4,8 +4,9 @@ import queue
 import numpy as np
 from agent import Agent
 from agent_helpers import message_filter
+from anlytics.helpers import peak_detection
 from anlytics.price_action.patterns import PatternTypes
-from anlytics.price_action.patterns.harmonic_patterns import peak_detection, is_gartly_pattern, is_butterfly_pattern, \
+from anlytics.price_action.patterns.harmonic_patterns import  is_gartly_pattern, is_butterfly_pattern, \
     is_bat_pattern, is_cab_pattern
 from anlytics.price_action.price_action_pattern_analyser import PriceActionPatternAnalyser
 from data.data_formats import MarketStatus, MarketDirection

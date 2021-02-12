@@ -7,6 +7,10 @@ agents:
     name: MarketTrendAnalysingAgent
     code: agent/analysers/market_trend_analysing.py
 
+  market_equilibrium_analysing: # Quantitative Facts Analysing Agent
+    name: MarketEquilibriumAnalysingAgent
+    code: agent/analysers/market_equilibrium_analysing.py
+
   crypto_reading_agent: # Qualitative Agent
     name: CryptoReadingAgent
     code: agent/source_readers/crypto_reading_agent.py

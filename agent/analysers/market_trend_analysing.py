@@ -86,7 +86,7 @@ class MarketTrendAnalysingAgent:
                     top_changes = [{
                         **list(filter(lambda x: x["name"] == tc["name"], balance_powers))[0],
                         **tc} for tc in top_changes]
-                    log.info(f"{top_changes =}")
+                    # log.info(f"{top_changes =}")
                     await self.display(top_changes)
 
             except Exception as e:
