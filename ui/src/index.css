@@ -5,5 +5,5 @@ html,
 body,
 #root {
     height: 100%;
-    background-color: rgba(17, 24, 39, var(--tw-bg-opacity))
+    background-color:rgb(39, 46, 74)
 }
