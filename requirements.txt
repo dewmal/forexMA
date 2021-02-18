@@ -9,3 +9,4 @@ simpletransformers
 wandb
 tokenizers==0.9.4
 aiohttp
+unicorn-binance-websocket-api

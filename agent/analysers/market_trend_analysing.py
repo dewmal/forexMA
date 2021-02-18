@@ -41,6 +41,7 @@ class MarketTrendAnalysingAgent:
     async def accept_message(self, agent, message):
         max_length = 0
         for dt in message:
+            # log.info(f"{dt=}")
             time = datetime.fromtimestamp(int(dt["C"]) / 1000)
             name = dt["s"]
             if name not in self.history:
