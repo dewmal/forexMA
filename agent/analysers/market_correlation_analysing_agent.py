@@ -23,14 +23,15 @@ class MarketCorrelationAnalysingAgent:
             p_changes_corr = p_changes_2d / p_changes_2d.T
             p_changes_corr = np.nan_to_num(p_changes_corr, neginf=0, posinf=0)
             max_corr = p_changes_corr.max()
-            max_val_index = np.argwhere(p_changes_corr == max_corr)
+            min_corr = p_changes_corr.min()
+            max_val_indexes = np.argwhere((p_changes_corr == max_corr) | (p_changes_corr == min_corr))
 
-            y_asset = values_list[max_val_index[0, 0]]
-            x_asset = values_list[max_val_index[0, 1]]
-
-            log.info(f"{max_corr=}")
-            log.info(f"{y_asset['s']=} {x_asset['s']=}")
-            log.info(f"{y_asset['P']=} {x_asset['P']=}")
+            for val_index in max_val_indexes:
+                x, y = val_index[0], val_index[1]
+                corr = p_changes_corr[x, y]
+                y_asset = values_list[y]
+                x_asset = values_list[x]
+                log.info(f"{corr=} {y_asset['s']=} {x_asset['s']=}")
 
 
         except Exception as e:
