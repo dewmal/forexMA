@@ -3,10 +3,4 @@ pandas
 numpy
 tqdm
 matplotlib
-torch
-torchvision
-simpletransformers
-wandb
-tokenizers==0.9.4
-aiohttp
-unicorn-binance-websocket-api
+cryptoxlib-aio

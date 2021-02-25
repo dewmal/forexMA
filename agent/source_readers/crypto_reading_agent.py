@@ -1,12 +1,13 @@
 import asyncio
-import json
 import logging
-from unicorn_binance_websocket_api.unicorn_binance_websocket_api_manager import BinanceWebSocketApiManager
+from datetime import datetime
+
+from cryptoxlib.clients.binance.BinanceClient import BinanceClient
+from cryptoxlib.clients.binance.BinanceWebsocket import BestOrderBookTickerSubscription, AllMarketTickersSubscription
 
 from agent import Agent
 from agent.source_readers.converters import binance_message as bm
 from utils.timeit import log_time
-from utils.web_socket import websocket_connect
 
 log = logging.getLogger(Agent.Crypto_Reading_Agent)
 
@@ -22,17 +23,35 @@ api_secret = "JmiUiVlP3aH2NZm269YjV4Yp4zATKu1OJfQpdXIITSBgMHxJXlUB1Gajj1gz9XCD"
 
 class CryptoReadingAgent:
     last_time_values = {}
+    exit_request = True
 
     def __init__(self, *args, **kwargs):
-        self.bm = BinanceWebSocketApiManager(exchange="binance.com-testnet")
-        # self.bm.start_all_mark_price_socket(lambdmm
+        self.client = BinanceClient(api_key, api_secret, api_trace_log=True)
+
+    async def all_market_ticker_update(self, response) -> None:
+        await self.publish(Agent.Market_Correlation_Analysing_Agent, response)
+
+    async def execute(self, *args, **kwargs):
+        self.client.compose_subscriptions([
+            AllMarketTickersSubscription(callbacks=[self.all_market_ticker_update]),
+        ])
+        # Execute all websockets asynchronously
+        while self.exit_request:
+            try:
+                await self.client.start_websockets()
+            except Exception as e:
+                log.error(e, e.args)
+                await asyncio.sleep(0.5)
+
+        await self.client.close()
+
+        log.info("Workgin")
 
     @log_time(logger=log, log_off=False)
     async def all_market_price(self, data):
         # for dt in data:
         await self.publish(Agent.Market_Trend_Analysing_Agent, data)
         await self.publish(Agent.Market_Equilibrium_Analysing_Agent, data)
-        log.info(f"{len(data)=}")
 
     @log_time(logger=log, log_off=False)
     async def read_asset_market_price(self, data):
@@ -57,18 +76,3 @@ class CryptoReadingAgent:
                     "time": start_time,
                     "value": data
                 }
-
-            # await self.display(status.to_dict())
-
-    async def execute(self, *args, **kwargs):
-        uri = "wss://stream.binance.com:9443/ws"
-        all_market_data_reader = websocket_connect(f"{uri}/!ticker@arr", None, self.all_market_price)
-        await asyncio.wait([all_market_data_reader], return_when=asyncio.ALL_COMPLETED)
-
-        # self.bm.create_stream("arr", "!ticker", output="UnicornFy")
-        #
-        # while True:
-        #     stream_buffer = self.bm.pop_stream_data_from_stream_buffer()
-        #     if stream_buffer:
-        #         await self.all_market_price(data=stream_buffer)
-        #     #

@@ -8,3 +8,4 @@ class Agent:
     Crypto_Reading_Agent = "CryptoReadingAgent"
     Market_Trend_Analysing_Agent = "MarketTrendAnalysingAgent"
     Market_Equilibrium_Analysing_Agent = "MarketEquilibriumAnalysingAgent"
+    Market_Correlation_Analysing_Agent = "MarketCorrelationAnalysingAgent"
