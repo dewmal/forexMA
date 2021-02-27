@@ -29,7 +29,8 @@ class CryptoReadingAgent:
         self.client = BinanceClient(api_key, api_secret, api_trace_log=True)
 
     async def all_market_ticker_update(self, response) -> None:
-        await self.publish(Agent.Market_Correlation_Analysing_Agent, response)
+        await self.all_market_price(response["data"])
+        # await self.publish(Agent.Asset_Selecting_Agent, response)
 
     async def execute(self, *args, **kwargs):
         self.client.compose_subscriptions([

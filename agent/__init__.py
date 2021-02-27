@@ -9,3 +9,7 @@ class Agent:
     Market_Trend_Analysing_Agent = "MarketTrendAnalysingAgent"
     Market_Equilibrium_Analysing_Agent = "MarketEquilibriumAnalysingAgent"
     Market_Correlation_Analysing_Agent = "MarketCorrelationAnalysingAgent"
+    Asset_Selecting_Agent = "AssetSelectingAgent"
+
+    # Identifying given agent price variations
+    Asset_Analysing_Agent = "AssetAnalysingAgent"

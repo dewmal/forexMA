@@ -3,17 +3,26 @@ version: 1.0.0
 buildversion: 1
 agents:
 
- #market_trend_analysing: # Quantitative Facts Analysing Agent
- #  name: MarketTrendAnalysingAgent
- #  code: agent/analysers/market_trend_analysing.py
+  asset_analysing_agent: # Asset Analysing Agent
+    name: AssetAnalysingAgent
+    code: agent/analysers/asset_analysing_agent.py
+    type: dynamic
 
- #market_equilibrium_analysing: # Quantitative Facts Analysing Agent
- #  name: MarketEquilibriumAnalysingAgent
- #  code: agent/analysers/market_equilibrium_analysing.py
+  market_trend_analysing: # Quantitative Facts Analysing Agent
+    name: MarketTrendAnalysingAgent
+    code: agent/analysers/market_trend_analysing.py
 
-  market_equilibrium_analysing: # Market Correlation Analysing Agent
-    name: MarketCorrelationAnalysingAgent
-    code: agent/analysers/market_correlation_analysing_agent.py
+  market_equilibrium_analysing: # Quantitative Facts Analysing Agent
+    name: MarketEquilibriumAnalysingAgent
+    code: agent/analysers/market_equilibrium_analysing.py
+
+  #  market_equilibrium_analysing: # Market Correlation Analysing Agent
+  #    name: MarketCorrelationAnalysingAgent
+  #    code: agent/analysers/market_correlation_analysing_agent.py
+
+  asset_selecting_agent: # AssetSelecting Agent
+    name: AssetSelectingAgent
+    code: agent/analysers/asset_selecting_agent.py
 
   crypto_reading_agent: # Qualitative Agent
     name: CryptoReadingAgent

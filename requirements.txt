@@ -4,3 +4,4 @@ numpy
 tqdm
 matplotlib
 cryptoxlib-aio
+scipy
